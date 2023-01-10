@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class RepeatBackground : MonoBehaviour
 {
+    //Repeticion imagen del fondo
+
     private Vector3 startPos;
-    private float repeatWidith; // Anchira de una unidad de fondo
+    private float repeatWidith; // Anchura de una unidad de fondo
 
     private void Start()
     {

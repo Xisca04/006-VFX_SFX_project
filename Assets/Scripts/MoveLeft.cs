@@ -8,8 +8,25 @@ public class MoveLeft : MonoBehaviour
 
     public float speed = 30f;
 
+    private Player_Controller playerControllerScript;  // Comunicacion con el script Player_Controller
+
+    public float leftBound;
+
+    private void Start()
+    {
+        playerControllerScript = FindObjectOfType<Player_Controller>();
+    }
+
     private void Update()
     {
-        transform.Translate(Vector3.left * Time.deltaTime * speed);
+        if (!playerControllerScript.gameOver)
+        {
+            transform.Translate(Vector3.left * Time.deltaTime * speed);
+        }
+
+        if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))  //Destruye los obstaculos si salen del limite
+        {
+            Destroy(gameObject);
+        }
     }
 }
