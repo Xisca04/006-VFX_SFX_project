@@ -11,15 +11,28 @@ public class Player_Controller : MonoBehaviour
 
     private bool isOnTheGround = true; // Quita el doble salto y evita que el jugador suba en exceso
     public bool gameOver;
-    
-    private Animator _animator;  // Animacion salto del jugador
-    
+
+    // Animacion salto del jugador
+    private Animator _animator;  
+    public float gravityModifier = 1.5f;
+
+    // private int randomNumber;
+
+    private void GameOver() // Configuracion de la muerte
+    {
+        gameOver = true;
+        _animator.SetBool("Death_b", true);
+        _animator.SetInteger("DeathType_int", 1);
+
+        // Generar numero aleatorio para la muerte
+        // randomNumber = Random.Range(1, 2);
+    }
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
-        
+        Physics.gravity *= gravityModifier;     
     }
 
     private void Update()
@@ -28,16 +41,15 @@ public class Player_Controller : MonoBehaviour
         {
             isOnTheGround = false;
             _rigidbody.AddForce(Vector3.up * jumForce, ForceMode.Impulse);
+            _animator.SetTrigger("Jump_trig");
         }
-
-        _animator.SetTrigger("Jump_trig");
     }
 
     private void OnCollisionEnter(Collision otherCollider)
     {
         if (otherCollider.gameObject.CompareTag("Obstacle"))
         {
-            gameOver = true;
+            GameOver();
         }
         else if (otherCollider.gameObject.CompareTag("Ground"))
         {
