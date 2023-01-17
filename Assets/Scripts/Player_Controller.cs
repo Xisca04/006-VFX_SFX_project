@@ -41,10 +41,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnTheGround && !gameOver) 
         {
-            isOnTheGround = false;
-            _rigidbody.AddForce(Vector3.up * jumForce, ForceMode.Impulse);
-            _animator.SetTrigger("Jump_trig"); // Llama al trigger para que de la animación de correr pase a saltar
-            dirtParticle.Stop();
+            Jump();
         }
     }
 
@@ -53,11 +50,20 @@ public class Player_Controller : MonoBehaviour
         if (otherCollider.gameObject.CompareTag("Obstacle"))
         {
             GameOver();
+            Destroy(otherCollider.gameObject);  // Destruye el obstaculo cuando se produce el GAME OVER
         }
         else if (otherCollider.gameObject.CompareTag("Ground"))
         {
             isOnTheGround = true;
             dirtParticle.Play();
         }
+    }
+
+    private void Jump()
+    {
+        isOnTheGround = false;
+        _rigidbody.AddForce(Vector3.up * jumForce, ForceMode.Impulse);
+        _animator.SetTrigger("Jump_trig"); // Llama al trigger para que de la animación de correr pase a saltar
+        dirtParticle.Stop();
     }
 }
