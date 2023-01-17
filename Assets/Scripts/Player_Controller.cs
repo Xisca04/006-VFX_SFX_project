@@ -16,12 +16,18 @@ public class Player_Controller : MonoBehaviour
     private Animator _animator;  
     public float gravityModifier = 1.5f;
 
+    // Sistema de particulas
+    public ParticleSystem explosionParticle; // Explosion
+    public ParticleSystem dirtParticle; // Tierra
+
 
     private void GameOver() // Configuracion de la muerte
     {
         gameOver = true;
         _animator.SetBool("Death_b", true);
-        _animator.SetInteger("DeathType_int", Random.Range(1,3)); // Genera un numero aleatorio entre 1 y 3, este ultimo no esta incluido, asi que solo entre el 1 y el 2
+        _animator.SetInteger("DeathType_int", Random.Range(1,3)); // Genera un numero aleatorio entre 1 y 3, este ultimo no esta incluido, asi que solo entra el 1 y el 2
+        explosionParticle.Play();  // Activacion del sistema de particulas cuando el player muere
+        dirtParticle.Stop();  // Detiene las particulas de tierra al morir
     }
 
     private void Start()
@@ -38,6 +44,7 @@ public class Player_Controller : MonoBehaviour
             isOnTheGround = false;
             _rigidbody.AddForce(Vector3.up * jumForce, ForceMode.Impulse);
             _animator.SetTrigger("Jump_trig"); // Llama al trigger para que de la animación de correr pase a saltar
+            dirtParticle.Stop();
         }
     }
 
@@ -50,6 +57,7 @@ public class Player_Controller : MonoBehaviour
         else if (otherCollider.gameObject.CompareTag("Ground"))
         {
             isOnTheGround = true;
+            dirtParticle.Play();
         }
     }
 }
