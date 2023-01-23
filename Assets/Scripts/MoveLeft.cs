@@ -21,7 +21,7 @@ public class MoveLeft : MonoBehaviour
     {
         if (!playerControllerScript.gameOver)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * speed);
+            transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
         }
 
         if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))  //Destruye los obstaculos si salen del limite

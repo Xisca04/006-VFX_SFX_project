@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1434367472086315535}
   - component: {fileID: 1434367472087143479}
   - component: {fileID: 1434367472088246227}
-  - component: {fileID: 1434367472086173521}
   - component: {fileID: 1434367472086173522}
   - component: {fileID: 1434367472086173523}
+  - component: {fileID: 4992492299079827604}
+  - component: {fileID: -276062644849201623}
   m_Layer: 0
   m_Name: Barrel_01
   m_TagString: Obstacle
@@ -86,19 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1434367472086173521
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434367472086030191}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.94652724, y: 1.3434768, z: 0.94652736}
-  m_Center: {x: -0.000000044703484, y: 0.6717384, z: 0}
 --- !u!54 &1434367472086173522
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +117,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   leftBound: -7
+--- !u!114 &4992492299079827604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434367472086030191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c069d97115a9d4695e2a8655e0aabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 200
+--- !u!136 &-276062644849201623
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434367472086030191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.47326368
+  m_Height: 1.3434768
+  m_Direction: 1
+  m_Center: {x: -0.000000044703484, y: 0.6717384, z: -9.545974e-15}
