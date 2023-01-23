@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
     //Creacion automatica de los obstaculos
     
-    public GameObject obstaclePrefab;
+    public GameObject[] obstaclePrefabs;
     private float startDelay = 2f;
     private float repeatRate = 3f;
 
@@ -21,7 +22,8 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        Instantiate(obstaclePrefab, transform.position, obstaclePrefab.transform.rotation);
+        int randomIdx = Random.Range(0, obstaclePrefabs.Length);
+        Instantiate(obstaclePrefabs[randomIdx], transform.position, obstaclePrefabs[randomIdx].transform.rotation);
     }
 
     private void Update()

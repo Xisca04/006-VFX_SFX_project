@@ -20,6 +20,11 @@ public class Player_Controller : MonoBehaviour
     public ParticleSystem explosionParticle; // Explosion
     public ParticleSystem dirtParticle; // Tierra
 
+    // Efectos de sonido
+    public AudioClip[] jumpSounds;
+    public AudioClip[] crashSounds;
+    private AudioSource _audioSource;
+
 
     private void GameOver() // Configuracion de la muerte
     {
@@ -28,13 +33,15 @@ public class Player_Controller : MonoBehaviour
         _animator.SetInteger("DeathType_int", Random.Range(1,3)); // Genera un numero aleatorio entre 1 y 3, este ultimo no esta incluido, asi que solo entra el 1 y el 2
         explosionParticle.Play();  // Activacion del sistema de particulas cuando el player muere
         dirtParticle.Stop();  // Detiene las particulas de tierra al morir
+        ChooseRandomSFX(crashSounds); // Funcion que elije aleatoriamente el sonido de la muerte
     }
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
-        Physics.gravity *= gravityModifier;     
+        Physics.gravity *= gravityModifier;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -65,5 +72,12 @@ public class Player_Controller : MonoBehaviour
         _rigidbody.AddForce(Vector3.up * jumForce, ForceMode.Impulse);
         _animator.SetTrigger("Jump_trig"); // Llama al trigger para que de la animación de correr pase a saltar
         dirtParticle.Stop();
+        ChooseRandomSFX(jumpSounds);  // Funcion que elije aleatoriamente el sonido del salto
+    }
+
+    private void ChooseRandomSFX(AudioClip[] sounds)
+    {
+        int randomIdx = Random.Range(0, sounds.Length);
+        _audioSource.PlayOneShot(sounds[randomIdx], 1);
     }
 }
